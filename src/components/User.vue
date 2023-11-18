@@ -21,13 +21,13 @@ const name = ref("Guilherme");
 const birthdate = ref(0);
 const age = ref(0);
 
-function calculateAge() {
+const calculateAge = () => {
   age.value = new Date().getFullYear() - birthdate.value;
-}
+};
 
-function calculateAgeWithParam(param) {
+const calculateAgeWithParam = (param) => {
   age.value = age.value + param;
-}
+};
 </script>
 
 <style scoped>
