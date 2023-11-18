@@ -2,28 +2,32 @@
   <div>
     <form class="form">
       <label for="name">Nome:</label><br />
-      <input type="text" id="name" v-model="user.name" />
+      <input type="text" id="name" v-model="name" />
       <label for="birthdate">Data Nascimento:</label><br />
-      <input type="number" id="birthdate" v-model="user.birthdate" />
+      <input type="number" id="birthdate" v-model="birthdate" />
     </form>
   </div>
-  <p style="text-align: center">{{ user.name }}</p>
+  <button class="button" @click="calculateAge">Calcular idade</button>
+  <p style="text-align: center">
+    {{ name }} nasceu em {{ birthdate }} e tem {{ age }} anos
+  </p>
+  <button class="button" @click="calculateAgeWithParam(2)">+2 anos</button>
 </template>
 
 <script setup>
-import { reactive, ref } from "vue";
-
-const user = reactive({
-  name: "Guilherme",
-  birthdate: 0,
-  age: 0,
-});
+import { ref } from "vue";
 
 const name = ref("Guilherme");
 const birthdate = ref(0);
 const age = ref(0);
 
-age.value = 10;
+function calculateAge() {
+  age.value = new Date().getFullYear() - birthdate.value;
+}
+
+function calculateAgeWithParam(param) {
+  age.value = age.value + param;
+}
 </script>
 
 <style scoped>
@@ -36,5 +40,20 @@ age.value = 10;
 
 .form label {
   color: white;
+}
+
+.button {
+  margin: 5px auto;
+  padding: 5px;
+  display: block;
+  background-color: darkcyan;
+  border-radius: 5px;
+  border-style: none;
+  cursor: pointer;
+  color: white;
+}
+
+.button:hover {
+  background-color: rgb(102, 147, 147);
 }
 </style>
