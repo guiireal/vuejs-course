@@ -11,6 +11,13 @@ defineProps({
   person: {
     type: Object,
     required: true,
+    default: () => ({
+      id: 0,
+      email: "",
+      firstName: "",
+      lastName: "",
+      avatar: "",
+    }),
   },
 });
 </script>
