@@ -3,7 +3,9 @@
     <img :src="person.avatar" alt="Perfil" />
     <strong>{{ person.first_name }}</strong>
     <span>{{ person.email }}</span>
-    <button class="button" @click="sendEmit(person.id)">Selecionar</button>
+    <button class="button" @click="sendEmit(person.id)">
+      {{ !selection ? "Selecionar" : "Desmarcar" }}
+    </button>
   </div>
 </template>
 
@@ -26,6 +28,7 @@ defineProps({
       avatar: "",
     }),
   },
+  selection: Boolean,
 });
 </script>
 
