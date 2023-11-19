@@ -5,13 +5,12 @@
   </header>
 
   <main>
-    <UserList />
+    <RouterView />
   </main>
 </template>
 
 <script setup>
 import TheHeader from "./components/TheHeader.vue";
-import UserList from "./components/UserList.vue";
 </script>
 
 <style>
@@ -29,10 +28,5 @@ header {
 [color-scheme="dark"] {
   background-color: #333;
   color: #fff;
-}
-
-[color-scheme="light"] {
-  background-color: pink;
-  color: #333;
 }
 </style>

@@ -6,8 +6,8 @@
     <button class="button" @click="sendEmit(person.id)">
       {{ !selection ? "Selecionar" : "Desmarcar" }}
     </button>
+    <Alert />
   </div>
-  <Alert />
 </template>
 
 <script setup>

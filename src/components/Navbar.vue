@@ -3,7 +3,7 @@
     <span>Tutorial Vue</span>
     <ul>
       <li v-for="menu in menus" :key="menu.id">
-        <a :href="menu.link">{{ menu.name }}</a>
+        <RouterLink :to="menu.path">{{ menu.name }}</RouterLink>
       </li>
     </ul>
   </nav>
@@ -11,9 +11,8 @@
 
 <script setup>
 const menus = [
-  { id: 1, name: "Home", link: "#" },
-  { id: 2, name: "Sobre", link: "#" },
-  { id: 3, name: "Login", link: "#" },
+  { id: 1, name: "Home", path: "/" },
+  { id: 2, name: "Equipe", path: "/team" },
 ];
 </script>
 
