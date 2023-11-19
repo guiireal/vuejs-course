@@ -5,7 +5,18 @@
 </template>
 
 <script setup>
-const name = "Guilherme";
+import { computed } from "@vue/reactivity";
+import { useFetch } from "../composables/useFetch";
+
+const name = computed(() => {
+  if (!data.value) {
+    return "";
+  }
+
+  return `${data.value.first_name} ${data.value.last_name}`;
+});
+
+const { data } = useFetch("https://reqres.in/api/users/3");
 </script>
 
 <style scoped>
