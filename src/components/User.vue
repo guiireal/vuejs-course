@@ -1,12 +1,19 @@
 <template>
   <div class="profile">
     <img :src="person.avatar" alt="Perfil" />
-    <strong>{{ person.firstName }}</strong>
+    <strong>{{ person.first_name }}</strong>
     <span>{{ person.email }}</span>
+    <button class="button" @click="sendEmit(person.id)">Selecionar</button>
   </div>
 </template>
 
 <script setup>
+const emit = defineEmits(["select"]);
+
+const sendEmit = (id) => {
+  emit("select", id);
+};
+
 defineProps({
   person: {
     type: Object,
@@ -14,8 +21,8 @@ defineProps({
     default: () => ({
       id: 0,
       email: "",
-      firstName: "",
-      lastName: "",
+      first_name: "",
+      last_name: "",
       avatar: "",
     }),
   },

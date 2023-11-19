@@ -1,6 +1,11 @@
 <template>
   <div class="people">
-    <User v-for="person in people" :key="person.id" :person="person" />
+    <User
+      v-for="person in people"
+      :key="person.id"
+      :person="person"
+      @select="addSelected(person.id)"
+    />
   </div>
 </template>
 
@@ -9,12 +14,18 @@ import { onMounted, ref } from "vue";
 import User from "./User.vue";
 
 const people = ref([]);
+const idSelecteds = ref([]);
 
 const fetchUsers = async () => {
-  const request = await fetch(`https://reqres.in/api/users?page=2`);
+  const request = await fetch(`https://reqres.in/api/users`);
   const json = await request.json();
 
   return json.data;
+};
+
+const addSelected = (id) => {
+  idSelecteds.value.push(id);
+  console.log(idSelecteds.value);
 };
 
 onMounted(async () => {
