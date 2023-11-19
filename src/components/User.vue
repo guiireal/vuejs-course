@@ -2,7 +2,7 @@
   <div>
     <form class="form">
       <label for="id">Código do usuário:</label><br />
-      <input type="text" id="id" v-model="id" />
+      <input type="number" id="id" v-model="id" />
     </form>
   </div>
   <button class="button" :disabled="!enableButton" @click="getUser">
@@ -17,7 +17,7 @@
 </template>
 
 <script setup>
-import { computed, onMounted, ref, watch } from "vue";
+import { computed, onMounted, ref, watch, watchEffect } from "vue";
 
 const person = ref({});
 const id = ref(0);
@@ -43,7 +43,20 @@ const fetchUser = async (id) => {
   return json.data;
 };
 
-watch([id, person], ([newId, oldId], [newPerson, oldPerson]) => {});
+// Executará assim que o valor de id for alterado
+watch(id, (value) => {
+  if (value !== "" && value < 0) {
+    alert("Código inválido!");
+    id.value = 0;
+  }
+});
+
+// Executará imediatamente
+watchEffect(() => {
+  if (id.value <= 0) {
+    alert("Código inválido!");
+  }
+});
 </script>
 
 <style scoped>
