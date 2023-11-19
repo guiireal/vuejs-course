@@ -8,31 +8,33 @@
       {{ selectedPerson.first_name }}
     </span>
   </div>
-  <div class="people">
+  <div v-if="isLoading"><h3>Carregando...</h3></div>
+  <div v-else class="people">
     <User
+      v-if="!error"
       v-for="person in people"
       :key="person.id"
       :person="person"
       @select="addSelected(person.id)"
       :selection="selectedId(person.id)"
     />
+    <div v-else>{{ error }}</div>
   </div>
 </template>
 
 <script setup>
-import { onMounted, ref, watchEffect } from "vue";
+import { computed, provide, ref } from "vue";
+import { useFetch } from "../composables/useFetch";
 import User from "./User.vue";
 
-const people = ref([]);
 const idSelecteds = ref([]);
-const selectedPeople = ref([]);
+const alert = "Em caso de dúvidas, contate o suporte.";
 
-const fetchUsers = async () => {
-  const request = await fetch(`https://reqres.in/api/users`);
-  const json = await request.json();
-
-  return json.data;
-};
+const {
+  data: people,
+  error,
+  isLoading,
+} = useFetch("https://reqres.in/api/users?delay=1");
 
 const addSelected = (id) => {
   if (selectedId(id)) {
@@ -44,15 +46,17 @@ const addSelected = (id) => {
   idSelecteds.value.push(id);
 };
 
-onMounted(async () => {
-  people.value = await fetchUsers();
-});
+const selectedPeople = computed(() => {
+  if (!people.value) {
+    return [];
+  }
 
-watchEffect(() => {
-  selectedPeople.value = people.value.filter((person) => selectedId(person.id));
+  return people.value.filter((person) => selectedId(person.id));
 });
 
 const selectedId = (id) => idSelecteds.value.includes(id);
+
+provide("alert", alert);
 </script>
 
 <style scoped>

@@ -7,9 +7,12 @@
       {{ !selection ? "Selecionar" : "Desmarcar" }}
     </button>
   </div>
+  <Alert />
 </template>
 
 <script setup>
+import Alert from "./Alert.vue";
+
 const emit = defineEmits(["select"]);
 
 const sendEmit = (id) => {
@@ -20,13 +23,6 @@ defineProps({
   person: {
     type: Object,
     required: true,
-    default: () => ({
-      id: 0,
-      email: "",
-      first_name: "",
-      last_name: "",
-      avatar: "",
-    }),
   },
   selection: Boolean,
 });
