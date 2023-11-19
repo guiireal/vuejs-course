@@ -8,7 +8,7 @@
       <h3 style="color: red" v-else>Operacional</h3>
       <img :src="person.avatar" alt="Perfil" />
       <strong>{{ person.first_name }}</strong>
-      <span style="font-size: 10px">{{ person.email }}</span>
+      <span style="font-size: 10px" v-email="person.email"></span>
     </div>
   </div>
 </template>
@@ -28,6 +28,13 @@ const fetchUsers = async () => {
 onMounted(async () => {
   people.value = await fetchUsers();
 });
+
+const vEmail = {
+  created(element, binding) {
+    element.style.color = "blue";
+    element.innerHTML = `<a href='mailto:${binding.value}'>${binding.value}</a>`;
+  },
+};
 </script>
 
 <style scoped>
