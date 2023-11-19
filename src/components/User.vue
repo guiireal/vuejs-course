@@ -1,33 +1,49 @@
 <template>
   <div>
     <form class="form">
-      <label for="name">Nome:</label><br />
-      <input type="text" id="name" v-model="name" />
-      <label for="birthdate">Data Nascimento:</label><br />
-      <input type="number" id="birthdate" v-model="birthdate" />
+      <label for="id">Código do usuário:</label><br />
+      <input type="text" id="id" v-model="id" />
     </form>
   </div>
-  <button class="button" @click="calculateAge">Calcular idade</button>
-  <p style="text-align: center">
-    {{ name }} nasceu em {{ birthdate }} e tem {{ age }} anos
-  </p>
-  <button class="button" @click="calculateAgeWithParam(2)">+2 anos</button>
+  <button class="button" :disabled="!enableButton" @click="getUser">
+    Buscar
+  </button>
+
+  <div class="profile">
+    <img :src="person.avatar" alt="Perfil" />
+    <strong>{{ fullName }}</strong>
+    <span>{{ person.email }}</span>
+  </div>
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { computed, onMounted, ref, watch } from "vue";
 
-const name = ref("Guilherme");
-const birthdate = ref(0);
-const age = ref(0);
+const person = ref({});
+const id = ref(0);
 
-const calculateAge = () => {
-  age.value = new Date().getFullYear() - birthdate.value;
+onMounted(async () => {
+  person.value = await fetchUser(1);
+});
+
+const enableButton = computed(() => id.value > 0);
+
+const fullName = computed(
+  () => `${person.value.first_name} ${person.value.last_name}`
+);
+
+const getUser = async () => {
+  person.value = await fetchUser(id.value);
 };
 
-const calculateAgeWithParam = (param) => {
-  age.value = age.value + param;
+const fetchUser = async (id) => {
+  const request = await fetch(`https://reqres.in/api/users/${id}`);
+  const json = await request.json();
+
+  return json.data;
 };
+
+watch([id, person], ([newId, oldId], [newPerson, oldPerson]) => {});
 </script>
 
 <style scoped>
@@ -53,7 +69,29 @@ const calculateAgeWithParam = (param) => {
   color: white;
 }
 
-.button:hover {
-  background-color: rgb(102, 147, 147);
+button:disabled,
+button[disabled] {
+  border: 1px solid #999;
+  background-color: #ccc;
+  color: #666;
+  cursor: default;
+}
+
+.profile {
+  width: 150px;
+  text-align: center;
+}
+
+.profile img {
+  margin: 0 auto;
+  width: 80px;
+  display: block;
+  padding: 5px;
+  border-radius: 10px;
+}
+
+.profile span {
+  display: block;
+  font-size: 0.75rem;
 }
 </style>
