@@ -1,61 +1,21 @@
 <template>
-  <form class="form">
-    <label for="id">Código do usuário:</label><br />
-    <input type="number" id="id" v-model="id" />
-  </form>
-
   <div class="profile">
     <img :src="person.avatar" alt="Perfil" />
-    <strong>{{ fullName }}</strong>
+    <strong>{{ person.firstName }}</strong>
     <span>{{ person.email }}</span>
   </div>
 </template>
 
 <script setup>
-import { computed, ref, watch, watchEffect } from "vue";
-
-const person = ref({});
-const id = ref(0);
-
-const fullName = computed(
-  () => `${person.value.first_name} ${person.value.last_name}`
-);
-
-const fetchUser = async (id) => {
-  const request = await fetch(`https://reqres.in/api/users/${id}`);
-  const json = await request.json();
-
-  return json.data;
-};
-
-// Executará assim que o valor de id for alterado
-watch(id, (value) => {
-  if (value < 0) {
-    alert("Código inválido!");
-    id.value = 0;
-  }
-});
-
-// Executará imediatamente
-watchEffect(async () => {
-  if (id.value >= 0) {
-    person.value = await fetchUser(id.value || 1);
-  }
+defineProps({
+  person: {
+    type: Object,
+    required: true,
+  },
 });
 </script>
 
 <style scoped>
-.form {
-  margin: 0 auto;
-  padding: 5px;
-  width: 200px;
-  background-color: darkcyan;
-}
-
-.form label {
-  color: white;
-}
-
 .button {
   margin: 5px auto;
   padding: 5px;

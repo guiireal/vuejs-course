@@ -1,20 +1,12 @@
 <template>
   <div class="people">
-    <div class="profile" v-for="person in people" :key="person.id">
-      <h3 style="color: blue" v-if="person.first_name === 'George'">Gerente</h3>
-      <h3 style="color: green" v-else-if="person.first_name === 'Rachel'">
-        Financeiro
-      </h3>
-      <h3 style="color: red" v-else>Operacional</h3>
-      <img :src="person.avatar" alt="Perfil" />
-      <strong>{{ person.first_name }}</strong>
-      <span style="font-size: 10px" v-email="person.email"></span>
-    </div>
+    <User v-for="person in people" :key="person.id" :person="person" />
   </div>
 </template>
 
 <script setup>
 import { onMounted, ref } from "vue";
+import User from "./User.vue";
 
 const people = ref([]);
 
@@ -28,13 +20,6 @@ const fetchUsers = async () => {
 onMounted(async () => {
   people.value = await fetchUsers();
 });
-
-const vEmail = {
-  created(element, binding) {
-    element.style.color = "blue";
-    element.innerHTML = `<a href='mailto:${binding.value}'>${binding.value}</a>`;
-  },
-};
 </script>
 
 <style scoped>
