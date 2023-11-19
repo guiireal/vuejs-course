@@ -14,7 +14,7 @@ import TheHeader from "./components/TheHeader.vue";
 import UserList from "./components/UserList.vue";
 </script>
 
-<style scoped>
+<style>
 * {
   margin: 0;
   padding: 0;
@@ -24,5 +24,15 @@ import UserList from "./components/UserList.vue";
 
 header {
   line-height: 1.5;
+}
+
+[color-scheme="dark"] {
+  background-color: #333;
+  color: #fff;
+}
+
+[color-scheme="light"] {
+  background-color: pink;
+  color: #333;
 }
 </style>

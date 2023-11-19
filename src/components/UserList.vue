@@ -34,7 +34,7 @@ const {
   data: people,
   error,
   isLoading,
-} = useFetch("https://reqres.in/api/users?delay=1");
+} = useFetch("https://reqres.in/api/users");
 
 const addSelected = (id) => {
   if (selectedId(id)) {
