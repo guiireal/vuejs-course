@@ -2,14 +2,20 @@
   <nav>
     <span>Tutorial Vue</span>
     <ul>
-      <li><a href="#">Home</a></li>
-      <li><a href="#">Sobre</a></li>
-      <li><a href="#">Login</a></li>
+      <li v-for="menu in menus" :key="menu.id">
+        <a :href="menu.link">{{ menu.name }}</a>
+      </li>
     </ul>
   </nav>
 </template>
 
-<script setup></script>
+<script setup>
+const menus = [
+  { id: 1, name: "Home", link: "#" },
+  { id: 2, name: "Sobre", link: "#" },
+  { id: 3, name: "Login", link: "#" },
+];
+</script>
 
 <style scoped>
 nav {

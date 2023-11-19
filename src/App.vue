@@ -1,17 +1,17 @@
 <template>
-  <Navbar />
+  <Navbar v-once />
   <header>
     <TheHeader />
   </header>
 
   <main>
-    <User />
+    <UserList />
   </main>
 </template>
 
 <script setup>
 import TheHeader from "./components/TheHeader.vue";
-import User from "./components/User.vue";
+import UserList from "./components/UserList.vue";
 </script>
 
 <style scoped>

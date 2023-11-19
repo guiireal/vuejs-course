@@ -1,10 +1,8 @@
 <template>
-  <div>
-    <form class="form">
-      <label for="id">Código do usuário:</label><br />
-      <input type="number" id="id" v-model="id" />
-    </form>
-  </div>
+  <form class="form">
+    <label for="id">Código do usuário:</label><br />
+    <input type="number" id="id" v-model="id" />
+  </form>
 
   <div class="profile">
     <img :src="person.avatar" alt="Perfil" />
