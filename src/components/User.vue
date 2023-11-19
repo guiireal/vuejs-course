@@ -5,9 +5,6 @@
       <input type="number" id="id" v-model="id" />
     </form>
   </div>
-  <button class="button" :disabled="!enableButton" @click="getUser">
-    Buscar
-  </button>
 
   <div class="profile">
     <img :src="person.avatar" alt="Perfil" />
@@ -17,24 +14,14 @@
 </template>
 
 <script setup>
-import { computed, onMounted, ref, watch, watchEffect } from "vue";
+import { computed, ref, watch, watchEffect } from "vue";
 
 const person = ref({});
 const id = ref(0);
 
-onMounted(async () => {
-  person.value = await fetchUser(1);
-});
-
-const enableButton = computed(() => id.value > 0);
-
 const fullName = computed(
   () => `${person.value.first_name} ${person.value.last_name}`
 );
-
-const getUser = async () => {
-  person.value = await fetchUser(id.value);
-};
 
 const fetchUser = async (id) => {
   const request = await fetch(`https://reqres.in/api/users/${id}`);
@@ -45,16 +32,16 @@ const fetchUser = async (id) => {
 
 // Executará assim que o valor de id for alterado
 watch(id, (value) => {
-  if (value !== "" && value < 0) {
+  if (value < 0) {
     alert("Código inválido!");
     id.value = 0;
   }
 });
 
 // Executará imediatamente
-watchEffect(() => {
-  if (id.value <= 0) {
-    alert("Código inválido!");
+watchEffect(async () => {
+  if (id.value >= 0) {
+    person.value = await fetchUser(id.value || 1);
   }
 });
 </script>
