@@ -10,14 +10,14 @@
     </select>
     <div>
       <button
-        :class="[button, buttonLogin]"
+        :class="$style.buttonLogin"
         @click="loginStore.authUser(person.first_name)"
       >
         Logar
       </button>
     </div>
     <div>
-      <button @click="getColors">Buscar cores</button>
+      <button :style="style" @click="getColors">Buscar cores</button>
     </div>
   </div>
 </template>
@@ -40,6 +40,7 @@ const router = useRoute();
 const officeSelected = ref("");
 const buttonLogin = ref("button-login");
 const button = ref("button");
+const style = "color: blue; padding: 5px;";
 
 const offices = ["Desenvolvedor", "Designer", "Gerente de Projetos", "Diretor"];
 
@@ -56,8 +57,8 @@ watch(officeSelected, (newOffice) => {
 });
 </script>
 
-<style scoped>
-.button-login {
+<style module>
+.buttonLogin {
   background: #57bf3e;
 }
 </style>
