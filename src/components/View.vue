@@ -1,7 +1,5 @@
 <template>
-  <Teleport to="body">
-    <Navbar v-once />
-  </Teleport>
+  <Navbar v-once />
   <header>
     <slot name="header" />
   </header>

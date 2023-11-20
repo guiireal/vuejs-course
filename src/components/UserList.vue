@@ -22,12 +22,16 @@
     </div>
     <div v-else>{{ error }}</div>
   </div>
+  <Teleport to="#alert">
+    <OtherAlert />
+  </Teleport>
 </template>
 
 <script setup>
 import { computed, provide, ref } from "vue";
 import { useRouter } from "vue-router";
 import { useFetch } from "../composables/useFetch";
+import OtherAlert from "./OtherAlert.vue";
 import User from "./User.vue";
 
 const router = useRouter();
