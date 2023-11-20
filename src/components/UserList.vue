@@ -1,5 +1,5 @@
 <template>
-  <div class="selected">
+  <div :class="list.selected">
     <span
       v-for="selectedPerson in selectedPeople"
       :key="selectedPerson.id"
@@ -9,7 +9,7 @@
     </span>
   </div>
   <div v-if="isLoading"><h3>Carregando...</h3></div>
-  <div v-else class="people">
+  <div v-else :class="list.people">
     <div v-for="person in people" v-if="!error" :key="person.id">
       <button class="button" @click="redirect(person.id)">
         Ver funcionário
@@ -68,10 +68,7 @@ const redirect = (id) => {
 provide("alert", alert);
 </script>
 
-<style scoped>
-:deep(.alert) {
-  color: red;
-}
+<style module="list">
 .people {
   display: flex;
   flex-wrap: wrap;

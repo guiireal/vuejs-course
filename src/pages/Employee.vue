@@ -38,7 +38,6 @@ const { addOffice, getColors } = officeStore;
 const router = useRoute();
 
 const officeSelected = ref("");
-const buttonLogin = ref("button-login");
 const button = ref("button");
 const style = "color: blue; padding: 5px;";
 
