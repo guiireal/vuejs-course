@@ -23,7 +23,9 @@
     <div v-else>{{ error }}</div>
   </div>
   <Teleport to="#alert">
-    <OtherAlert />
+    <Transition>
+      <OtherAlert v-if="showAlert" />
+    </Transition>
   </Teleport>
 </template>
 
@@ -35,6 +37,8 @@ import OtherAlert from "./OtherAlert.vue";
 import User from "./User.vue";
 
 const router = useRouter();
+
+const showAlert = ref(false);
 
 const idSelecteds = ref([]);
 const alert = "Em caso de dúvidas, contate o suporte.";
@@ -52,6 +56,9 @@ const addSelected = (id) => {
     );
     return;
   }
+
+  showAlert.value = true;
+
   idSelecteds.value.push(id);
 };
 
@@ -108,5 +115,14 @@ provide("alert", alert);
   padding: 5px;
   font-size: 0.785rem;
   border-radius: 5px;
+}
+
+v-enter-active,
+v-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+v-leave-to {
+  opacity: 0;
 }
 </style>
