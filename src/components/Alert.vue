@@ -1,16 +1,21 @@
 <template>
   <div class="alert">
-    {{ alert }}
+    {{ theAlert }}
   </div>
 </template>
 
 <script setup>
 import { inject } from "vue";
 
-const alert = inject("alert");
+const theAlert = inject("alert");
+
+const callAlert = () => {
+  alert("Alerta!");
+};
 
 defineExpose({
-  alert,
+  theAlert,
+  callAlert,
 });
 </script>
 

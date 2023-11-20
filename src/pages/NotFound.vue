@@ -2,6 +2,7 @@
   <div>
     <h1 ref="title">...</h1>
     <Alert ref="alertRef" />
+    <button @click="showMessage">Chamar alerta</button>
   </div>
 </template>
 
@@ -15,7 +16,12 @@ const alertRef = ref(null);
 onMounted(() => {
   title.value.style.color = "blue";
   title.value.innerText = "Página não encontrada!";
+  console.log(title.value.theAlert);
 });
+
+const showMessage = () => {
+  alertRef.value.callAlert();
+};
 
 provide("alert", "Página não encontrada!");
 </script>
