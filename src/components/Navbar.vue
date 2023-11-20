@@ -1,6 +1,7 @@
 <template>
   <nav>
     <span>Tutorial Vue</span>
+    Total de cargos: {{ totalOffices }}
     <ul>
       <li v-for="menu in menus" :key="menu.id">
         <RouterLink :to="menu.path">{{ menu.name }}</RouterLink>
@@ -10,6 +11,12 @@
 </template>
 
 <script setup>
+import { storeToRefs } from "pinia";
+import { useOfficeStore } from "../store/officeStore";
+
+const officeStore = useOfficeStore();
+const { totalOffices } = storeToRefs(officeStore);
+
 const menus = [
   { id: 1, name: "Home", path: "/" },
   { id: 2, name: "Equipe", path: "/team" },

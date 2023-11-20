@@ -1,10 +1,16 @@
 <template>
   <div>
-    <h1 class="title">Guilherme França</h1>
+    <h1 v-if="isLogged" class="title">Bem vindo(a) {{ loggedUser }}</h1>
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { storeToRefs } from "pinia";
+import { useLoginStore } from "../store/loginStore";
+
+const loginStore = useLoginStore();
+const { loggedUser, isLogged } = storeToRefs(loginStore);
+</script>
 
 <style scoped>
 .title {
