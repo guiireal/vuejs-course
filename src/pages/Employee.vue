@@ -10,7 +10,7 @@
     </select>
     <div>
       <button
-        :class="{ button, 'button-login': enableButton }"
+        :class="[button, buttonLogin]"
         @click="loginStore.authUser(person.first_name)"
       >
         Logar
@@ -38,8 +38,8 @@ const { addOffice, getColors } = officeStore;
 const router = useRoute();
 
 const officeSelected = ref("");
-const button = ref("button button-login");
-const enableButton = ref(true);
+const buttonLogin = ref("button-login");
+const button = ref("button");
 
 const offices = ["Desenvolvedor", "Designer", "Gerente de Projetos", "Diretor"];
 
