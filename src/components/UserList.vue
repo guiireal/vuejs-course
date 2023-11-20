@@ -11,7 +11,9 @@
   <div v-if="isLoading"><h3>Carregando...</h3></div>
   <div v-else class="people">
     <div v-for="person in people" v-if="!error" :key="person.id">
-      <button @click="redirect(person.id)">Ver funcionário</button>
+      <button class="button" @click="redirect(person.id)">
+        Ver funcionário
+      </button>
       <User
         :person="person"
         :selection="selectedId(person.id)"
@@ -67,6 +69,9 @@ provide("alert", alert);
 </script>
 
 <style scoped>
+:deep(.alert) {
+  color: red;
+}
 .people {
   display: flex;
   flex-wrap: wrap;

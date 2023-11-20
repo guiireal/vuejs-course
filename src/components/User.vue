@@ -29,25 +29,6 @@ defineProps({
 </script>
 
 <style scoped>
-.button {
-  margin: 5px auto;
-  padding: 5px;
-  display: block;
-  background-color: darkcyan;
-  border-radius: 5px;
-  border-style: none;
-  cursor: pointer;
-  color: white;
-}
-
-button:disabled,
-button[disabled] {
-  border: 1px solid #999;
-  background-color: #ccc;
-  color: #666;
-  cursor: default;
-}
-
 .profile {
   width: 150px;
   text-align: center;
