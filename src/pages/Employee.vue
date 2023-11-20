@@ -9,7 +9,12 @@
       </option>
     </select>
     <div>
-      <button @click="loginStore.authUser(person.first_name)">Logar</button>
+      <button
+        :class="{ button, 'button-login': enableButton }"
+        @click="loginStore.authUser(person.first_name)"
+      >
+        Logar
+      </button>
     </div>
     <div>
       <button @click="getColors">Buscar cores</button>
@@ -33,6 +38,8 @@ const { addOffice, getColors } = officeStore;
 const router = useRoute();
 
 const officeSelected = ref("");
+const button = ref("button button-login");
+const enableButton = ref(true);
 
 const offices = ["Desenvolvedor", "Designer", "Gerente de Projetos", "Diretor"];
 
@@ -49,4 +56,8 @@ watch(officeSelected, (newOffice) => {
 });
 </script>
 
-<style scoped></style>
+<style scoped>
+.button-login {
+  background: #57bf3e;
+}
+</style>
