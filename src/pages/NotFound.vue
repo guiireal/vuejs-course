@@ -16,7 +16,6 @@ const alertRef = ref(null);
 onMounted(() => {
   title.value.style.color = "blue";
   title.value.innerText = "Página não encontrada!";
-  console.log(title.value.theAlert);
 });
 
 const showMessage = () => {
