@@ -11,6 +11,7 @@
 </template>
 
 <script setup>
+import { provide } from "vue";
 import Alert from "./Alert.vue";
 
 const emit = defineEmits(["select"]);
@@ -26,6 +27,8 @@ defineProps({
   },
   selection: Boolean,
 });
+
+provide("alert", "Pessoa selecionada!");
 </script>
 
 <style scoped>

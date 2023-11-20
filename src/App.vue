@@ -9,7 +9,7 @@
       </TheHeader>
     </template>
     <RouterView />
-    <template #footer>Footer</template>
+    <template #footer>Rodapé</template>
   </View>
 </template>
 

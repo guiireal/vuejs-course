@@ -8,6 +8,10 @@
 import { inject } from "vue";
 
 const alert = inject("alert");
+
+defineExpose({
+  alert,
+});
 </script>
 
 <style scoped>

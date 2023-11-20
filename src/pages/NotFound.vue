@@ -1,9 +1,21 @@
 <template>
   <div>
-    <h1>Página não encontrada</h1>
+    <h1 ref="title">...</h1>
+    <Alert ref="alertRef" />
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { onMounted, provide, ref } from "vue";
+import Alert from "../components/Alert.vue";
 
-<style scoped></style>
+const title = ref(null);
+const alertRef = ref(null);
+
+onMounted(() => {
+  title.value.style.color = "blue";
+  title.value.innerText = "Página não encontrada!";
+});
+
+provide("alert", "Página não encontrada!");
+</script>
